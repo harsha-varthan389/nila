@@ -32,6 +32,9 @@
   .doc-foot a{color:var(--glow);text-decoration:none}
   .doc-foot a:hover{text-decoration:underline}
 
+  .yt{display:flex;justify-content:center;margin-top:28px}
+  .yt #yt{width:200px;height:200px;border-radius:14px;overflow:hidden;opacity:.85;border:1px solid var(--line)}
+  .yt iframe{width:200px;height:200px;border:0}
 </style>
 </head>
 <body>
@@ -41,6 +44,7 @@
   <section class="card">
     <img class="doc" src="moon.jpg" alt="Collage of moon photographs at night">
   </section>
+  <div class="yt"><div id="yt"></div></div>
 </main>
 
 
@@ -66,6 +70,20 @@
   const kick=()=>{a.play().then(()=>ev.forEach(e=>removeEventListener(e,kick,true))).catch(()=>{});};
   const p=a.play();if(p)p.catch(()=>{ev.forEach(e=>addEventListener(e,kick,true));addEventListener('blur',()=>setTimeout(kick,50));});
 })();
+</script>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+/* song: official YouTube upload; starts on open if the browser allows sound, otherwise on the first tap */
+var ytPlayer;
+function onYouTubeIframeAPIReady(){
+  ytPlayer=new YT.Player('yt',{videoId:'Z01wXbI6JVc',width:200,height:200,
+    playerVars:{autoplay:1,loop:1,playlist:'Z01wXbI6JVc',controls:1,playsinline:1,rel:0,modestbranding:1},
+    events:{onReady:function(e){e.target.unMute();e.target.setVolume(100);e.target.playVideo();}}});
+  var ev=['pointerdown','touchstart','keydown','click'];
+  function kick(){if(!ytPlayer||!ytPlayer.getPlayerState)return;ytPlayer.unMute();ytPlayer.playVideo();
+    setTimeout(function(){if(ytPlayer.getPlayerState()===1)ev.forEach(function(n){removeEventListener(n,kick,true);});},400);}
+  ev.forEach(function(n){addEventListener(n,kick,true);});
+}
 </script>
 </body>
 </html>
