@@ -2,6 +2,7 @@
 <html lang="ta">
 <head>
 <meta charset="utf-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>நிலா · Nila</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,6 +15,7 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
+  html{background:#03050d}
   body{
     background:linear-gradient(180deg,#070b1f 0%,#03050d 100%) fixed;
     color:var(--ink); font-family:Inter,system-ui,sans-serif; overflow-x:hidden; min-height:100vh;
@@ -76,8 +78,8 @@
 /* song: official YouTube upload; starts on open if the browser allows sound, otherwise on the first tap */
 var ytPlayer;
 function onYouTubeIframeAPIReady(){
-  ytPlayer=new YT.Player('yt',{videoId:'Z01wXbI6JVc',width:200,height:200,
-    playerVars:{autoplay:1,loop:1,playlist:'Z01wXbI6JVc',controls:1,playsinline:1,rel:0,modestbranding:1},
+  ytPlayer=new YT.Player('yt',{host:'https://www.youtube-nocookie.com',videoId:'Z01wXbI6JVc',width:200,height:200,
+    playerVars:{autoplay:1,loop:1,playlist:'Z01wXbI6JVc',controls:1,playsinline:1,rel:0,modestbranding:1,origin:location.origin},
     events:{onReady:function(e){e.target.unMute();e.target.setVolume(100);e.target.playVideo();}}});
   var ev=['pointerdown','touchstart','keydown','click'];
   function kick(){if(!ytPlayer||!ytPlayer.getPlayerState)return;ytPlayer.unMute();ytPlayer.playVideo();
