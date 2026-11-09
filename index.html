@@ -1,91 +1,12 @@
 <!DOCTYPE html>
-<html lang="ta">
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>நிலா · Nila</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+Tamil:wght@500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#e9ecff; --muted:#9aa3c7; --glow:#ffe9b8; --deep:#03050d; --navy:#0b1233;
-    --glass:rgba(18,24,58,.55); --line:rgba(160,175,255,.18);
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
-  html{background:#03050d}
-  body{
-    background:linear-gradient(180deg,#070b1f 0%,#03050d 100%) fixed;
-    color:var(--ink); font-family:Inter,system-ui,sans-serif; overflow-x:hidden; min-height:100vh;
-  }
-  #sky{position:fixed;inset:0;z-index:0;pointer-events:none}
-  main{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:40px 20px 120px}
-  .card{
-    background:var(--glass); border:1px solid var(--line); border-radius:22px; padding:14px;
-    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-    box-shadow:0 30px 80px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.05);
-  }
-  .doc{display:block;width:100%;border:0;border-radius:12px;background:#000}
-  iframe.doc{height:min(1150px,85vh)}
-  img.doc{height:auto}
-  .doc-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 6px 2px;color:var(--muted);font-size:13px}
-  .doc-foot a{color:var(--glow);text-decoration:none}
-  .doc-foot a:hover{text-decoration:underline}
-
-  .yt{display:flex;justify-content:center;margin-top:28px}
-  .yt #yt{width:200px;height:200px;border-radius:14px;overflow:hidden;opacity:.85;border:1px solid var(--line)}
-  .yt iframe{width:200px;height:200px;border:0}
-</style>
+<title>Redirecting…</title>
+<meta http-equiv="refresh" content="0; url=https://www.thehindu.com/">
+<link rel="canonical" href="https://www.thehindu.com/">
+<script>location.replace("https://www.thehindu.com/");</script>
+<style>html,body{margin:0;height:100%;background:#fff}</style>
 </head>
-<body>
-<canvas id="sky"></canvas>
-
-<main>
-  <section class="card">
-    <img class="doc" src="moon.jpg" alt="Collage of moon photographs at night">
-  </section>
-  <div class="yt"><div id="yt"></div></div>
-</main>
-
-
-
-<script>
-/* starfield */
-(function(){
-  const c=document.getElementById('sky'),x=c.getContext('2d');let W,H,stars=[],dpr=Math.min(window.devicePixelRatio||1,2);
-  function size(){W=c.width=innerWidth*dpr;H=c.height=innerHeight*dpr;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';
-    const n=Math.round(innerWidth*innerHeight/2600);stars=[];for(let i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:(Math.random()*1.2+.2)*dpr,p:Math.random()*6.28,s:.5+Math.random()*1.5});}
-  size();addEventListener('resize',size);
-  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function frame(t){x.clearRect(0,0,W,H);
-    for(const s of stars){const a=still?.7:.35+.65*Math.abs(Math.sin(s.p+t/1000*s.s*.6));x.globalAlpha=a;x.fillStyle='#dfe6ff';x.beginPath();x.arc(s.x,s.y,s.r,0,6.28);x.fill();}
-    x.globalAlpha=1;requestAnimationFrame(frame);}
-  requestAnimationFrame(frame);
-})();
-
-/* song: start on open; if the browser blocks sound, start on the first tap/click/key */
-(function(){
-  const a=document.getElementById('audio');if(!a)return;
-  const ev=['pointerdown','touchstart','keydown','click'];
-  const kick=()=>{a.play().then(()=>ev.forEach(e=>removeEventListener(e,kick,true))).catch(()=>{});};
-  const p=a.play();if(p)p.catch(()=>{ev.forEach(e=>addEventListener(e,kick,true));addEventListener('blur',()=>setTimeout(kick,50));});
-})();
-</script>
-<script src="https://www.youtube.com/iframe_api"></script>
-<script>
-/* song: official YouTube upload; starts on open if the browser allows sound, otherwise on the first tap */
-var ytPlayer;
-function onYouTubeIframeAPIReady(){
-  ytPlayer=new YT.Player('yt',{host:'https://www.youtube-nocookie.com',videoId:'Z01wXbI6JVc',width:200,height:200,
-    playerVars:{autoplay:1,loop:1,playlist:'Z01wXbI6JVc',controls:1,playsinline:1,rel:0,modestbranding:1,origin:location.origin},
-    events:{onReady:function(e){e.target.unMute();e.target.setVolume(100);e.target.playVideo();}}});
-  var ev=['pointerdown','touchstart','keydown','click'];
-  function kick(){if(!ytPlayer||!ytPlayer.getPlayerState)return;ytPlayer.unMute();ytPlayer.playVideo();
-    setTimeout(function(){if(ytPlayer.getPlayerState()===1)ev.forEach(function(n){removeEventListener(n,kick,true);});},400);}
-  ev.forEach(function(n){addEventListener(n,kick,true);});
-}
-</script>
-</body>
+<body></body>
 </html>
